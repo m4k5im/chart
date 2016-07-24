@@ -1,0 +1,15 @@
+button:active, button:focus, input:focus {
+  outline: none !important;
+}
+
+.container {
+    padding-top: 50px;
+}
+
+.alert {
+   margin-top: 10px;
+}
+
+.file-upload {
+    margin-top: 10px;
+}

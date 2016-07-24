@@ -1,0 +1,58 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html ng-app="mainApp">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/bower_components/chartist/dist/chartist.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'core/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/custom.css' %}">
+    <script type="text/javascript" src="{% static 'core/bower_components/chartist/dist/chartist.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'core/bower_components/angular/angular.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'core/bower_components/angular-file-upload/dist/angular-file-upload.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'core/js/app.js' %}"></script>
+</head>
+<body>
+
+<div class="container" ng-controller="AppController">
+
+    <div class="row">
+
+        <div class="col-md-4"><br>
+            <input type="file" nv-file-select uploader="uploader"/>
+
+            <div class="alert alert-danger" role="alert" ng-show="fileError">
+                Файл должен быть в формате <strong>.xls</strong> или <strong>.xlsx</strong>
+            </div>
+
+            <div class="file-upload" ng-repeat="item in uploader.queue">
+                <button class="btn btn-primary btn-lg btn-block" ng-click="item.upload()"
+                        ng-disabled="item.isUploading || item.isUploaded">Загрузить файл
+                </button>
+
+                <div class="alert alert-success" role="alert" ng-show="item.isUploaded">
+                    Файл <strong ng-bind="item.file.name"></strong> успешно загружен.
+                </div>
+            </div>
+
+            <hr>
+
+            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="renderChart()" ng-disabled="!data">
+                Построить график
+            </button>
+            <br>
+        </div>
+
+        <div class="col-md-8">
+            <div class="ct-chart ct-golden-section" id="chart1"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
